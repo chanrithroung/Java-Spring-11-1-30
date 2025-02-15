@@ -6,11 +6,8 @@ public class DemoFunction {
         int[] id = new int[100];
         String[] studentName = new String[100];
         String[] gender = new String[100];
-
         Process(id, studentName, gender);
-
     }
-
 
     public static void line(int n, char symbol) {
         for(int i = 0; i < n; i++) System.out.print(symbol);
@@ -53,12 +50,40 @@ public class DemoFunction {
     }
 
 
+    static int searchStudentByName( String []name, int n) {
+        System.out.print("\nEnter student name for search : ");
+        String searchName = scanner.nextLine();
+        for(int i= 0; i < n; i++)
+            if (name[i].equals(searchName)) return i;
+        return -1;
+    }
+
+
+    static void updateStudent(int []id, String []name, String []gender, int n) {
+        int index = searchStudentByName(name, n);
+        if(index != -1) {
+            System.out.printf("=========[ Student %d ]==========\n", (index + 1));
+            System.out.print("Enter student id : ");
+            id[index] = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("Enter student Name : ");
+            name[index] = scanner.nextLine();
+
+            System.out.print("Enter student Gender : ");
+            gender[index] = scanner.nextLine();
+            System.out.println("Student updated Successfully!");
+        }
+    }
+
+
     static void Process(int []id, String []name, String []gender) {
         int op, n = 0;
         do {
             menu();
             System.out.print("Please Select one option: ");
             op = scanner.nextInt();
+            scanner.nextLine();
 
             switch (op) {
                 case 1 -> {
@@ -68,6 +93,9 @@ public class DemoFunction {
                 }
                 case 2 -> {
                     displayStudents(id, name, gender, n);
+                }
+                case 3 -> {
+                    updateStudent(id, name, gender, n);
                 }
             }
 
